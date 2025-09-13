@@ -30,7 +30,7 @@ const SortingSection: React.FC = () => {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className="space-y-6"
+      className="space-y-6 w-full max-w-full overflow-hidden"
     >
       {/* Header */}
       <div className="text-center space-y-2">

@@ -12,6 +12,17 @@ const ArrayVisualizer: React.FC<ArrayVisualizerProps> = ({
   maxValue = Math.max(...array.map(el => el.value)) 
 }) => {
   const containerHeight = 400
+  const barSpacing = 2
+  
+  // Calculate responsive bar width based on screen size and array length
+  const getBarWidth = () => {
+    if (typeof window !== 'undefined') {
+      const screenWidth = window.innerWidth
+      const availableWidth = Math.min(screenWidth - 64, 800) // 64px for padding
+      return Math.max(8, Math.min(40, (availableWidth - (array.length * barSpacing)) / array.length))
+    }
+    return 20 // fallback for SSR
+  }
 
   const getBarClass = (state: ArrayElement['state']) => {
     switch (state) {
@@ -32,33 +43,23 @@ const ArrayVisualizer: React.FC<ArrayVisualizerProps> = ({
     return Math.max(20, (value / maxValue) * (containerHeight - 60))
   }
 
-  const getBarWidth = () => {
-    // For mobile screens (sm and below)
-    if (typeof window !== 'undefined' && window.innerWidth < 640) {
-      return Math.max(4, Math.min(16, 300 / array.length))
-    }
-    // For tablet and desktop
-    return Math.max(8, Math.min(40, 600 / array.length))
-  }
-
   return (
-    <div className="visualizer-container">
+    <div className="visualizer-container w-full">
       <div 
-        className="flex items-end justify-center gap-1 mx-auto overflow-x-auto pb-4"
+        className="flex items-end justify-center space-x-1 mx-auto overflow-x-auto px-4"
         style={{ 
           height: `${containerHeight}px`,
-          maxWidth: '100%',
-          width: 'fit-content',
-          minHeight: `${containerHeight}px`
+          maxWidth: '100%'
         }}
       >
         {array.map((element, index) => (
           <motion.div
             key={`${element.index}-${element.value}`}
-            className={`relative flex flex-col items-center justify-end ${getBarClass(element.state)} flex-shrink-0`}
+            className={`relative flex flex-col items-center justify-end ${getBarClass(element.state)}`}
             style={{
               height: `${getBarHeight(element.value)}px`,
-              width: `${getBarWidth()}px`
+              width: `${getBarWidth()}px`,
+              flex: '0 0 auto'
             }}
             initial={{ height: 0, opacity: 0 }}
             animate={{ 

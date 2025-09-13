@@ -245,14 +245,14 @@ const AlgorithmComparison: React.FC<AlgorithmComparisonProps> = ({
 
       {/* Sort Controls */}
       <div className="bg-white dark:bg-slate-800 rounded-xl shadow-lg border border-slate-200 dark:border-slate-700 p-4">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-4">
+        <div className="flex flex-col space-y-4 lg:flex-row lg:items-center lg:justify-between lg:space-y-0">
+          <div className="flex flex-col space-y-3 sm:flex-row sm:items-center sm:space-y-0 sm:space-x-4">
             <span className="text-slate-700 dark:text-slate-300 font-medium">Sort by:</span>
-            <div className="flex gap-2">
+            <div className="flex flex-wrap gap-2">
               {[
-                { key: 'overall', label: 'Overall Score', icon: BarChart3 },
-                { key: 'time', label: 'Time Complexity', icon: Clock },
-                { key: 'space', label: 'Space Efficiency', icon: Zap }
+                { key: 'overall', label: 'Overall', icon: BarChart3 },
+                { key: 'time', label: 'Time', icon: Clock },
+                { key: 'space', label: 'Space', icon: Zap }
               ].map(({ key, label, icon: Icon }) => (
                 <button
                   key={key}
@@ -264,14 +264,15 @@ const AlgorithmComparison: React.FC<AlgorithmComparisonProps> = ({
                   }`}
                 >
                   <Icon className="w-3 h-3 mr-1" />
-                  {label}
+                  <span className="hidden sm:inline">{label}</span>
+                  <span className="sm:hidden">{key === 'overall' ? 'Overall' : key === 'time' ? 'Time' : 'Space'}</span>
                 </button>
               ))}
             </div>
           </div>
           
           {/* Toggle for actual vs theoretical data */}
-          <div className="flex items-center gap-2">
+          <div className="flex items-center justify-between sm:justify-start gap-2">
             <span className="text-sm text-slate-600 dark:text-slate-400">
               {showActualData ? 'Actual Results' : 'Theoretical Analysis'}
             </span>
@@ -351,33 +352,42 @@ const AlgorithmComparison: React.FC<AlgorithmComparisonProps> = ({
       {comparing.length > 0 ? (
         <div className="bg-white dark:bg-slate-800 rounded-xl shadow-lg border border-slate-200 dark:border-slate-700 overflow-hidden">
           <div className="overflow-x-auto">
-            {showActualData ? (
-              <table className="w-full min-w-[360px] sm:min-w-[480px]">
+{showActualData ? (
+              <table className="w-full">
                 <thead className="bg-slate-50 dark:bg-slate-700">
                   <tr>
-                    <th className="px-2 py-2 text-left text-xs font-semibold text-slate-900 dark:text-white">
+                    <th className="px-6 py-4 text-left text-sm font-semibold text-slate-900 dark:text-white">
                       Algorithm
                     </th>
-                    <th className="px-1 py-2 text-center text-xs font-semibold text-slate-900 dark:text-white">
-                      Comps
+                    <th className="px-6 py-4 text-center text-sm font-semibold text-slate-900 dark:text-white">
+                      Avg Comparisons
                     </th>
-                    <th className="px-1 py-2 text-center text-xs font-semibold text-slate-900 dark:text-white">
-                      Swaps
+                    <th className="px-6 py-4 text-center text-sm font-semibold text-slate-900 dark:text-white">
+                      Avg Swaps
                     </th>
-                    <th className="px-1 py-2 text-center text-xs font-semibold text-slate-900 dark:text-white">
-                      Time
+                    <th className="px-6 py-4 text-center text-sm font-semibold text-slate-900 dark:text-white">
+                      Time Score
+                      <div className="text-xs font-normal text-slate-500 dark:text-slate-400">
+                        (Based on actual performance)
+                      </div>
                     </th>
-                    <th className="px-1 py-2 text-center text-xs font-semibold text-slate-900 dark:text-white">
-                      Space
+                    <th className="px-6 py-4 text-center text-sm font-semibold text-slate-900 dark:text-white">
+                      Space Score
+                      <div className="text-xs font-normal text-slate-500 dark:text-slate-400">
+                        (Based on actual efficiency)
+                      </div>
                     </th>
-                    <th className="px-1 py-2 text-center text-xs font-semibold text-slate-900 dark:text-white">
-                      Score
+                    <th className="px-6 py-4 text-center text-sm font-semibold text-slate-900 dark:text-white">
+                      Overall Score
+                      <div className="text-xs font-normal text-slate-500 dark:text-slate-400">
+                        (Performance-based)
+                      </div>
                     </th>
-                    <th className="px-1 py-2 text-center text-xs font-semibold text-slate-900 dark:text-white">
+                    <th className="px-6 py-4 text-center text-sm font-semibold text-slate-900 dark:text-white">
                       Stable
                     </th>
-                    <th className="px-1 py-2 text-center text-xs font-semibold text-slate-900 dark:text-white">
-                      Place
+                    <th className="px-6 py-4 text-center text-sm font-semibold text-slate-900 dark:text-white">
+                      In-Place
                     </th>
                   </tr>
                 </thead>
@@ -475,77 +485,77 @@ const AlgorithmComparison: React.FC<AlgorithmComparisonProps> = ({
                 </tbody>
               </table>
             ) : (
-              <table className="w-full min-w-[360px] sm:min-w-[480px]">
+              <table className="w-full">
                 <thead className="bg-slate-50 dark:bg-slate-700">
                   <tr>
-                    <th className="px-2 py-3 text-left text-xs font-semibold text-slate-900 dark:text-white">
+                    <th className="px-6 py-4 text-left text-sm font-semibold text-slate-900 dark:text-white">
                       Algorithm
                     </th>
-                    <th className="px-2 py-3 text-center text-xs font-semibold text-slate-900 dark:text-white">
-                      Time
+                    <th className="px-6 py-4 text-center text-sm font-semibold text-slate-900 dark:text-white">
+                      Time Score
                     </th>
-                    <th className="px-2 py-3 text-center text-xs font-semibold text-slate-900 dark:text-white">
-                      Space
+                    <th className="px-6 py-4 text-center text-sm font-semibold text-slate-900 dark:text-white">
+                      Space Score
                     </th>
-                    <th className="px-2 py-3 text-center text-xs font-semibold text-slate-900 dark:text-white">
-                      Stable
+                    <th className="px-6 py-4 text-center text-sm font-semibold text-slate-900 dark:text-white">
+                      Stability
                     </th>
-                    <th className="px-2 py-3 text-center text-xs font-semibold text-slate-900 dark:text-white">
-                      In-Place
+                    <th className="px-6 py-4 text-center text-sm font-semibold text-slate-900 dark:text-white">
+                      Implementation
                     </th>
-                    <th className="px-2 py-3 text-center text-xs font-semibold text-slate-900 dark:text-white">
+                    <th className="px-6 py-4 text-center text-sm font-semibold text-slate-900 dark:text-white">
                       Overall
                     </th>
-                    <th className="px-2 py-3 text-left text-xs font-semibold text-slate-900 dark:text-white">
-                      Use Case
+                    <th className="px-6 py-4 text-left text-sm font-semibold text-slate-900 dark:text-white">
+                      Recommendation
                     </th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-200 dark:divide-slate-700">
                   {metrics.map((metric, index) => (
                     <tr key={metric.algorithm} className="hover:bg-slate-50 dark:hover:bg-slate-700/50">
-                      <td className="px-2 py-3">
+                      <td className="px-6 py-4">
                         <div className="flex items-center">
                           {index === 0 && (
-                            <CheckCircle className="w-4 h-4 text-green-500 mr-1" />
+                            <CheckCircle className="w-5 h-5 text-green-500 mr-2" />
                           )}
                           <div>
-                            <div className="font-medium text-slate-900 dark:text-white text-sm">
+                            <div className="font-medium text-slate-900 dark:text-white">
                               {algorithmData[metric.algorithm].name}
                             </div>
-                            <div className="text-xs text-slate-500 dark:text-slate-400">
+                            <div className="text-sm text-slate-500 dark:text-slate-400">
                               Rank #{index + 1}
                             </div>
                           </div>
                         </div>
                       </td>
-                      <td className="px-2 py-3 text-center">
-                        <span className={`px-2 py-1 rounded-full text-xs font-medium ${getScoreColor(metric.timeComplexityScore)}`}>
+                      <td className="px-6 py-4 text-center">
+                        <span className={`px-2 py-1 rounded-full text-sm font-medium ${getScoreColor(metric.timeComplexityScore)}`}>
                           {metric.timeComplexityScore}
                         </span>
                       </td>
-                      <td className="px-2 py-3 text-center">
-                        <span className={`px-2 py-1 rounded-full text-xs font-medium ${getScoreColor(metric.spaceComplexityScore)}`}>
+                      <td className="px-6 py-4 text-center">
+                        <span className={`px-2 py-1 rounded-full text-sm font-medium ${getScoreColor(metric.spaceComplexityScore)}`}>
                           {metric.spaceComplexityScore}
                         </span>
                       </td>
-                      <td className="px-2 py-3 text-center">
-                        <span className={`px-2 py-1 rounded-full text-xs font-medium ${getScoreColor(metric.stabilityScore)}`}>
-                          {metric.stabilityScore === 100 ? 'Yes' : 'No'}
+                      <td className="px-6 py-4 text-center">
+                        <span className={`px-2 py-1 rounded-full text-sm font-medium ${getScoreColor(metric.stabilityScore)}`}>
+                          {metric.stabilityScore === 100 ? 'Stable' : 'Unstable'}
                         </span>
                       </td>
-                      <td className="px-2 py-3 text-center">
-                        <span className={`px-2 py-1 rounded-full text-xs font-medium ${getScoreColor(metric.implementationScore)}`}>
+                      <td className="px-6 py-4 text-center">
+                        <span className={`px-2 py-1 rounded-full text-sm font-medium ${getScoreColor(metric.implementationScore)}`}>
                           {metric.implementationScore}
                         </span>
                       </td>
-                      <td className="px-2 py-3 text-center">
-                        <span className={`px-3 py-2 rounded-full text-xs font-bold ${getScoreColor(metric.overallScore)}`}>
+                      <td className="px-6 py-4 text-center">
+                        <span className={`px-3 py-2 rounded-full text-sm font-bold ${getScoreColor(metric.overallScore)}`}>
                           {metric.overallScore}
                         </span>
                       </td>
-                      <td className="px-2 py-3">
-                        <span className="text-xs text-slate-600 dark:text-slate-400">
+                      <td className="px-6 py-4">
+                        <span className="text-sm text-slate-600 dark:text-slate-400">
                           {metric.recommendation}
                         </span>
                       </td>
