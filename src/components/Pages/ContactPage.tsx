@@ -35,7 +35,7 @@ const ContactPage: React.FC = () => {
         from_email: formData.email,
         subject: formData.subject,
         message: formData.message,
-        to_email: 'rajroyking2806@gmail.com', // Your email address
+        to_email: 'kingcric28@gmail.com', // Your email address
         reply_to: formData.email,
         timestamp: new Date().toLocaleString()
       }
