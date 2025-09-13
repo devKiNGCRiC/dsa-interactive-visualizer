@@ -11,17 +11,24 @@ const ArrayVisualizer: React.FC<ArrayVisualizerProps> = ({
   array, 
   maxValue = Math.max(...array.map(el => el.value)) 
 }) => {
-  const containerHeight = 450 // Increased from 400 to give more space for indices
+  const containerHeight = 450
   const barSpacing = 2
   
-  // Calculate responsive bar width based on screen size and array length
+  // Calculate bar width based on array length
   const getBarWidth = () => {
-    if (typeof window !== 'undefined') {
-      const screenWidth = window.innerWidth
-      const availableWidth = Math.min(screenWidth - 64, 800) // 64px for padding
-      return Math.max(8, Math.min(40, (availableWidth - (array.length * barSpacing)) / array.length))
+    if (array.length <= 20) {
+      return 30 // Wide bars for small arrays
+    } else if (array.length <= 50) {
+      return 20 // Medium bars
+    } else {
+      return 16 // Consistent narrow bars for large arrays
     }
-    return 20 // fallback for SSR
+  }
+  
+  // Calculate total container width needed
+  const getTotalWidth = () => {
+    const barWidth = getBarWidth()
+    return array.length * (barWidth + barSpacing) + 32 // 32px for padding
   }
 
   const getBarClass = (state: ArrayElement['state']) => {
@@ -45,67 +52,80 @@ const ArrayVisualizer: React.FC<ArrayVisualizerProps> = ({
 
   return (
     <div className="visualizer-container w-full">
-      <div 
-        className="flex items-end justify-center space-x-1 mx-auto overflow-x-auto px-4"
-        style={{ 
-          height: `${containerHeight}px`,
-          maxWidth: '100%',
-          paddingBottom: '50px' // Extra padding for indices
-        }}
-      >
-        {array.map((element, index) => (
-          <motion.div
-            key={`${element.index}-${element.value}`}
-            className={`relative flex flex-col items-center justify-end ${getBarClass(element.state)}`}
-            style={{
-              height: `${getBarHeight(element.value)}px`,
-              width: `${getBarWidth()}px`,
-              flex: '0 0 auto'
-            }}
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ 
-              height: `${getBarHeight(element.value)}px`, 
-              opacity: 1,
-              scale: element.state === 'comparing' || element.state === 'swapping' ? 1.1 : 1
-            }}
-            transition={{
-              duration: 0.3,
-              type: 'spring',
-              stiffness: 300,
-              damping: 25
-            }}
-            whileHover={{ 
-              scale: 1.05,
-              transition: { duration: 0.1 }
-            }}
-          >
-            {/* Value label */}
-            <motion.span
-              className="absolute -top-6 text-xs font-bold whitespace-nowrap"
-              initial={{ y: 10, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: index * 0.02 }}
-              style={{ fontSize: array.length > 50 ? '10px' : '12px' }}
-            >
-              {element.value}
-            </motion.span>
-            
-            {/* Index label - positioned with sufficient bottom spacing */}
-            <motion.span
-              className="absolute text-xs text-slate-500 dark:text-slate-400 whitespace-nowrap"
-              style={{ 
-                bottom: '-35px', // Increased from -28px
-                fontSize: array.length > 50 ? '10px' : array.length > 30 ? '11px' : '12px'
+      {/* Scrollable container */}
+      <div className="w-full overflow-x-auto visualizer-scroll">
+        <div 
+          className="flex items-end justify-start space-x-1 mx-auto px-4"
+          style={{ 
+            height: `${containerHeight}px`,
+            width: `${getTotalWidth()}px`,
+            minWidth: '100%',
+            paddingBottom: '50px' // Extra padding for indices
+          }}
+        >
+          {array.map((element, index) => (
+            <motion.div
+              key={`${element.index}-${element.value}`}
+              className={`relative flex flex-col items-center justify-end ${getBarClass(element.state)}`}
+              style={{
+                height: `${getBarHeight(element.value)}px`,
+                width: `${getBarWidth()}px`,
+                flex: '0 0 auto'
               }}
-              initial={{ y: -10, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: index * 0.02 }}
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ 
+                height: `${getBarHeight(element.value)}px`, 
+                opacity: 1,
+                scale: element.state === 'comparing' || element.state === 'swapping' ? 1.1 : 1
+              }}
+              transition={{
+                duration: 0.3,
+                type: 'spring',
+                stiffness: 300,
+                damping: 25
+              }}
+              whileHover={{ 
+                scale: 1.05,
+                transition: { duration: 0.1 }
+              }}
             >
-              {index}
-            </motion.span>
-          </motion.div>
-        ))}
+              {/* Value label */}
+              <motion.span
+                className="absolute -top-6 text-xs font-bold whitespace-nowrap"
+                initial={{ y: 10, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: index * 0.02 }}
+                style={{ fontSize: array.length > 50 ? '10px' : '12px' }}
+              >
+                {element.value}
+              </motion.span>
+              
+              {/* Index label - positioned with sufficient bottom spacing */}
+              <motion.span
+                className="absolute text-xs text-slate-500 dark:text-slate-400 whitespace-nowrap"
+                style={{ 
+                  bottom: '-35px', // Increased from -28px
+                  fontSize: array.length > 50 ? '10px' : array.length > 30 ? '11px' : '12px'
+                }}
+                initial={{ y: -10, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: index * 0.02 }}
+              >
+                {index}
+              </motion.span>
+            </motion.div>
+          ))}
+        </div>
       </div>
+      
+      {/* Scroll indicator for large arrays */}
+      {array.length > 20 && (
+        <div className="text-center mt-2">
+          <p className="text-xs text-slate-500 dark:text-slate-400">
+            ← Scroll horizontally to see all {array.length} elements →
+          </p>
+        </div>
+      )}
       
       {/* Legend */}
       <div className="flex flex-wrap justify-center items-center gap-4 mt-6 pt-4 border-t border-slate-200 dark:border-slate-700">

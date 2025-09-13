@@ -34,7 +34,7 @@
   }
   
   .visualizer-container {
-    @apply bg-white dark:bg-slate-800 rounded-xl shadow-lg border border-slate-200 dark:border-slate-700 p-8 overflow-hidden;
+    @apply bg-white dark:bg-slate-800 rounded-xl shadow-lg border border-slate-200 dark:border-slate-700 p-8;
   }
   
   .array-element {
@@ -51,5 +51,41 @@
   
   .array-element-sorted {
     @apply bg-green-200 dark:bg-green-800 border-green-400 dark:border-green-600 text-green-800 dark:text-green-200;
+  }
+  
+  /* Custom scrollbar for visualizer */
+  .visualizer-scroll {
+    scrollbar-width: thin;
+    scrollbar-color: rgb(148 163 184) transparent;
+  }
+  
+  .visualizer-scroll::-webkit-scrollbar {
+    height: 8px;
+  }
+  
+  .visualizer-scroll::-webkit-scrollbar-track {
+    background: rgb(241 245 249);
+    border-radius: 4px;
+  }
+  
+  .visualizer-scroll::-webkit-scrollbar-thumb {
+    background: rgb(148 163 184);
+    border-radius: 4px;
+  }
+  
+  .visualizer-scroll::-webkit-scrollbar-thumb:hover {
+    background: rgb(100 116 139);
+  }
+  
+  .dark .visualizer-scroll::-webkit-scrollbar-track {
+    background: rgb(30 41 59);
+  }
+  
+  .dark .visualizer-scroll::-webkit-scrollbar-thumb {
+    background: rgb(71 85 105);
+  }
+  
+  .dark .visualizer-scroll::-webkit-scrollbar-thumb:hover {
+    background: rgb(51 65 85);
   }
 }
