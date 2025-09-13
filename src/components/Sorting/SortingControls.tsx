@@ -25,6 +25,7 @@ const SortingControls: React.FC<SortingControlsProps> = ({ onAlgorithmChange }) 
     swaps,
     setIsPlaying,
     setIsPaused,
+    setShouldStop,
     setSpeed,
     setAlgorithm,
     setArray,
@@ -149,39 +150,45 @@ const SortingControls: React.FC<SortingControlsProps> = ({ onAlgorithmChange }) 
 
     setIsPlaying(true)
     setIsPaused(false)
+    setShouldStop(false)
     resetArray()
 
     try {
       const sortingSpeed = 501 - speed
+      const sortingContext = {
+        shouldStop: () => useAlgorithmStore.getState().shouldStop
+      }
 
       switch (algorithm) {
         case 'bubble':
-          await bubbleSort(array, handleSortingStep, sortingSpeed)
+          await bubbleSort(array, handleSortingStep, sortingSpeed, sortingContext)
           break
         case 'selection':
-          await selectionSort(array, handleSortingStep, sortingSpeed)
+          await selectionSort(array, handleSortingStep, sortingSpeed, sortingContext)
           break
         case 'insertion':
-          await insertionSort(array, handleSortingStep, sortingSpeed)
+          await insertionSort(array, handleSortingStep, sortingSpeed, sortingContext)
           break
         case 'merge':
-          await mergeSort(array, handleSortingStep, sortingSpeed)
+          await mergeSort(array, handleSortingStep, sortingSpeed, sortingContext)
           break
         case 'quick':
-          await quickSort(array, handleSortingStep, sortingSpeed)
+          await quickSort(array, handleSortingStep, sortingSpeed, sortingContext)
           break
         default:
-          await bubbleSort(array, handleSortingStep, sortingSpeed)
+          await bubbleSort(array, handleSortingStep, sortingSpeed, sortingContext)
       }
     } catch (error) {
       console.error('Sorting error:', error)
     } finally {
       setIsPlaying(false)
       setIsPaused(false)
+      setShouldStop(false)
     }
   }
 
   const stopSorting = () => {
+    setShouldStop(true)
     setIsPlaying(false)
     setIsPaused(false)
   }

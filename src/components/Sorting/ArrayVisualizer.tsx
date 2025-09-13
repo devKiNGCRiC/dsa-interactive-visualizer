@@ -55,11 +55,13 @@ const ArrayVisualizer: React.FC<ArrayVisualizerProps> = ({
       {/* Scrollable container */}
       <div className="w-full overflow-x-auto visualizer-scroll">
         <div 
-          className="flex items-end justify-start space-x-1 mx-auto px-4"
+          className={`flex items-end space-x-1 mx-auto px-4 ${
+            array.length <= 20 ? 'justify-center' : 'justify-start'
+          }`}
           style={{ 
             height: `${containerHeight}px`,
-            width: `${getTotalWidth()}px`,
-            minWidth: '100%',
+            width: array.length <= 20 ? 'auto' : `${getTotalWidth()}px`,
+            minWidth: array.length <= 20 ? 'auto' : '100%',
             paddingBottom: '50px' // Extra padding for indices
           }}
         >
@@ -123,6 +125,15 @@ const ArrayVisualizer: React.FC<ArrayVisualizerProps> = ({
         <div className="text-center mt-2">
           <p className="text-xs text-slate-500 dark:text-slate-400">
             ← Scroll horizontally to see all {array.length} elements →
+          </p>
+        </div>
+      )}
+      
+      {/* Array size indicator for small arrays */}
+      {array.length <= 20 && (
+        <div className="text-center mt-2">
+          <p className="text-xs text-slate-500 dark:text-slate-400">
+            Showing all {array.length} elements (centered layout)
           </p>
         </div>
       )}

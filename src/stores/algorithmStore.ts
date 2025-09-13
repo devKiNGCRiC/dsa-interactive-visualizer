@@ -19,6 +19,7 @@ export interface AlgorithmState {
   array: ArrayElement[]
   isPlaying: boolean
   isPaused: boolean
+  shouldStop: boolean
   speed: number
   algorithm: string
   comparisons: number
@@ -33,6 +34,7 @@ interface AlgorithmStore extends AlgorithmState {
   setArray: (array: number[]) => void
   setIsPlaying: (isPlaying: boolean) => void
   setIsPaused: (isPaused: boolean) => void
+  setShouldStop: (shouldStop: boolean) => void
   setSpeed: (speed: number) => void
   setAlgorithm: (algorithm: string) => void
   updateElement: (index: number, state: ArrayElement['state']) => void
@@ -54,6 +56,7 @@ export const useAlgorithmStore = create<AlgorithmStore>((set, get) => ({
   array: [],
   isPlaying: false,
   isPaused: false,
+  shouldStop: false,
   speed: 100,
   algorithm: 'bubble',
   comparisons: 0,
@@ -78,6 +81,8 @@ export const useAlgorithmStore = create<AlgorithmStore>((set, get) => ({
   setIsPlaying: (isPlaying: boolean) => set({ isPlaying }),
 
   setIsPaused: (isPaused: boolean) => set({ isPaused }),
+
+  setShouldStop: (shouldStop: boolean) => set({ shouldStop }),
 
   setSpeed: (speed: number) => set({ speed }),
 
