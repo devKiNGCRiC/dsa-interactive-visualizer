@@ -1,0 +1,31 @@
+User-agent: *
+Allow: /
+
+# Allow search engines to crawl all content
+Sitemap: https://algovisualizer-pro.vercel.app/sitemap.xml
+
+# Specific guidelines for major search engines
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+# Block common bot traffic that's not search engines
+User-agent: CCBot
+Disallow: /
+
+User-agent: ChatGPT-User
+Disallow: /
+
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+# Crawl delay to be respectful to server resources
+Crawl-delay: 1
