@@ -6,35 +6,15 @@
 
 1. **Create Google Analytics Account**:
    - Go to [analytics.google.com](https://analytics.google.com)
-   - Sign in with **kingcric28@gmail.com**
    - Click "Start measuring"
-   
-2. **Account Setup**:
-   - **Account name**: `AlgoVisualizer Pro Analytics`
-   - **Data Sharing Settings**: Enable all (recommended)
-     - ✅ Google products & services
-     - ✅ Benchmarking  
-     - ✅ Technical support
-     - ✅ Account specialists
+   - Create account name: "AlgoVisualizer Pro"
+   - Property name: "AlgoVisualizer Pro"
+   - Select "Web" platform
+   - Add website URL: `https://algovisualizer-pro.vercel.app`
 
-3. **Property Setup**:
-   - **Property name**: `AlgoVisualizer Pro`
-   - **Time zone**: Your local timezone
-   - **Currency**: USD
-   
-4. **Business Information**:
-   - **Industry**: Technology → Software & Technology
-   - **Business size**: Small (1-100 employees)
-   - **Objectives**: Baseline reports, Customer engagement, Drive sales
-
-5. **Data Stream**:
-   - **Platform**: Web
-   - **Website URL**: `https://algovisualizer-pro.vercel.app`
-   - **Stream name**: `AlgoVisualizer Pro Website`
-
-6. **Get Your Tracking ID**:
+2. **Get Your Tracking ID**:
    - Copy the "Measurement ID" (starts with G-XXXXXXXXXX)
-   - Replace `G-XXXXXXXXXX` in environment variables with your actual ID
+   - Replace `G-XXXXXXXXXX` in `.env.local` with your actual ID
 
 3. **Deploy with Analytics**:
    ```bash
