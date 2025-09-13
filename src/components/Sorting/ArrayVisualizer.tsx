@@ -46,7 +46,7 @@ const ArrayVisualizer: React.FC<ArrayVisualizerProps> = ({
   return (
     <div className="visualizer-container w-full">
       <div 
-        className="flex items-end justify-center space-x-1 mx-auto overflow-x-auto px-4"
+        className="flex items-end justify-center space-x-1 mx-auto overflow-x-auto px-4 pb-8"
         style={{ 
           height: `${containerHeight}px`,
           maxWidth: '100%'
@@ -80,17 +80,22 @@ const ArrayVisualizer: React.FC<ArrayVisualizerProps> = ({
           >
             {/* Value label */}
             <motion.span
-              className="absolute -top-6 text-xs font-bold"
+              className="absolute -top-6 text-xs font-bold whitespace-nowrap"
               initial={{ y: 10, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: index * 0.02 }}
+              style={{ fontSize: array.length > 50 ? '10px' : '12px' }}
             >
               {element.value}
             </motion.span>
             
-            {/* Index label */}
+            {/* Index label - positioned with extra bottom spacing */}
             <motion.span
-              className="absolute -bottom-6 text-xs text-slate-500 dark:text-slate-400"
+              className="absolute text-xs text-slate-500 dark:text-slate-400 whitespace-nowrap"
+              style={{ 
+                bottom: '-28px',
+                fontSize: array.length > 50 ? '9px' : '11px'
+              }}
               initial={{ y: -10, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: index * 0.02 }}
