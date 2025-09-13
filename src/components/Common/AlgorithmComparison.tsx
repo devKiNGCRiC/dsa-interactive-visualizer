@@ -352,7 +352,7 @@ const AlgorithmComparison: React.FC<AlgorithmComparisonProps> = ({
         <div className="bg-white dark:bg-slate-800 rounded-xl shadow-lg border border-slate-200 dark:border-slate-700 overflow-hidden">
           <div className="overflow-x-auto">
             {showActualData ? (
-              <table className="w-full min-w-[800px]">
+              <table className="w-full min-w-[600px]">
                 <thead className="bg-slate-50 dark:bg-slate-700">
                   <tr>
                     <th className="px-3 py-3 text-left text-xs font-semibold text-slate-900 dark:text-white">
@@ -484,77 +484,77 @@ const AlgorithmComparison: React.FC<AlgorithmComparisonProps> = ({
                 </tbody>
               </table>
             ) : (
-              <table className="w-full min-w-[800px]">
+              <table className="w-full min-w-[600px]">
                 <thead className="bg-slate-50 dark:bg-slate-700">
                   <tr>
-                    <th className="px-6 py-4 text-left text-sm font-semibold text-slate-900 dark:text-white">
+                    <th className="px-2 py-3 text-left text-xs font-semibold text-slate-900 dark:text-white">
                       Algorithm
                     </th>
-                    <th className="px-6 py-4 text-center text-sm font-semibold text-slate-900 dark:text-white">
-                      Time Score
+                    <th className="px-2 py-3 text-center text-xs font-semibold text-slate-900 dark:text-white">
+                      Time
                     </th>
-                    <th className="px-6 py-4 text-center text-sm font-semibold text-slate-900 dark:text-white">
-                      Space Score
+                    <th className="px-2 py-3 text-center text-xs font-semibold text-slate-900 dark:text-white">
+                      Space
                     </th>
-                    <th className="px-6 py-4 text-center text-sm font-semibold text-slate-900 dark:text-white">
-                      Stability
+                    <th className="px-2 py-3 text-center text-xs font-semibold text-slate-900 dark:text-white">
+                      Stable
                     </th>
-                    <th className="px-6 py-4 text-center text-sm font-semibold text-slate-900 dark:text-white">
-                      Implementation
+                    <th className="px-2 py-3 text-center text-xs font-semibold text-slate-900 dark:text-white">
+                      In-Place
                     </th>
-                    <th className="px-6 py-4 text-center text-sm font-semibold text-slate-900 dark:text-white">
+                    <th className="px-2 py-3 text-center text-xs font-semibold text-slate-900 dark:text-white">
                       Overall
                     </th>
-                    <th className="px-6 py-4 text-left text-sm font-semibold text-slate-900 dark:text-white">
-                      Recommendation
+                    <th className="px-2 py-3 text-left text-xs font-semibold text-slate-900 dark:text-white">
+                      Use Case
                     </th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-200 dark:divide-slate-700">
                   {metrics.map((metric, index) => (
                     <tr key={metric.algorithm} className="hover:bg-slate-50 dark:hover:bg-slate-700/50">
-                      <td className="px-6 py-4">
+                      <td className="px-2 py-3">
                         <div className="flex items-center">
                           {index === 0 && (
-                            <CheckCircle className="w-5 h-5 text-green-500 mr-2" />
+                            <CheckCircle className="w-4 h-4 text-green-500 mr-1" />
                           )}
                           <div>
-                            <div className="font-medium text-slate-900 dark:text-white">
+                            <div className="font-medium text-slate-900 dark:text-white text-sm">
                               {algorithmData[metric.algorithm].name}
                             </div>
-                            <div className="text-sm text-slate-500 dark:text-slate-400">
+                            <div className="text-xs text-slate-500 dark:text-slate-400">
                               Rank #{index + 1}
                             </div>
                           </div>
                         </div>
                       </td>
-                      <td className="px-6 py-4 text-center">
-                        <span className={`px-2 py-1 rounded-full text-sm font-medium ${getScoreColor(metric.timeComplexityScore)}`}>
+                      <td className="px-2 py-3 text-center">
+                        <span className={`px-2 py-1 rounded-full text-xs font-medium ${getScoreColor(metric.timeComplexityScore)}`}>
                           {metric.timeComplexityScore}
                         </span>
                       </td>
-                      <td className="px-6 py-4 text-center">
-                        <span className={`px-2 py-1 rounded-full text-sm font-medium ${getScoreColor(metric.spaceComplexityScore)}`}>
+                      <td className="px-2 py-3 text-center">
+                        <span className={`px-2 py-1 rounded-full text-xs font-medium ${getScoreColor(metric.spaceComplexityScore)}`}>
                           {metric.spaceComplexityScore}
                         </span>
                       </td>
-                      <td className="px-6 py-4 text-center">
-                        <span className={`px-2 py-1 rounded-full text-sm font-medium ${getScoreColor(metric.stabilityScore)}`}>
-                          {metric.stabilityScore === 100 ? 'Stable' : 'Unstable'}
+                      <td className="px-2 py-3 text-center">
+                        <span className={`px-2 py-1 rounded-full text-xs font-medium ${getScoreColor(metric.stabilityScore)}`}>
+                          {metric.stabilityScore === 100 ? 'Yes' : 'No'}
                         </span>
                       </td>
-                      <td className="px-6 py-4 text-center">
-                        <span className={`px-2 py-1 rounded-full text-sm font-medium ${getScoreColor(metric.implementationScore)}`}>
+                      <td className="px-2 py-3 text-center">
+                        <span className={`px-2 py-1 rounded-full text-xs font-medium ${getScoreColor(metric.implementationScore)}`}>
                           {metric.implementationScore}
                         </span>
                       </td>
-                      <td className="px-6 py-4 text-center">
-                        <span className={`px-3 py-2 rounded-full text-sm font-bold ${getScoreColor(metric.overallScore)}`}>
+                      <td className="px-2 py-3 text-center">
+                        <span className={`px-3 py-2 rounded-full text-xs font-bold ${getScoreColor(metric.overallScore)}`}>
                           {metric.overallScore}
                         </span>
                       </td>
-                      <td className="px-6 py-4">
-                        <span className="text-sm text-slate-600 dark:text-slate-400">
+                      <td className="px-2 py-3">
+                        <span className="text-xs text-slate-600 dark:text-slate-400">
                           {metric.recommendation}
                         </span>
                       </td>
