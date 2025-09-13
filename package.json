@@ -8,7 +8,7 @@
   "keywords": ["data-structures", "algorithms", "visualization", "react", "typescript", "sorting", "educational"],
   "repository": {
     "type": "git",
-    "url": "https://github.com/yourusername/dsa-interactive-visualizer.git"
+    "url": "https://github.com/devKiNGCRiC/dsa-interactive-visualizer.git"
   },
   "homepage": "https://dsa-interactive-visualizer.vercel.app",
   "type": "module",

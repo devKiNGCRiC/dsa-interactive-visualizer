@@ -58,7 +58,7 @@ An interactive web application for learning and visualizing data structures and 
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/yourusername/dsa-interactive-visualizer.git
+   git clone https://github.com/devKiNGCRiC/dsa-interactive-visualizer.git
    cd dsa-interactive-visualizer
    ```
 
