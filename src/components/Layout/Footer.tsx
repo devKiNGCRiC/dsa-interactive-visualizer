@@ -15,7 +15,7 @@ const Footer: React.FC = () => {
           {/* Project Info */}
           <div className="space-y-4">
             <h3 className="text-lg font-semibold text-slate-900 dark:text-white">
-              DSA Visualizer
+              AlgoVisualizer Pro
             </h3>
             <p className="text-slate-600 dark:text-slate-400 text-sm">
               An interactive platform for learning and visualizing data structures and algorithms.
@@ -31,7 +31,7 @@ const Footer: React.FC = () => {
                 rel="noopener noreferrer"
                 className="text-primary-600 dark:text-primary-400 hover:underline font-medium"
               >
-                devKiNGCRiC
+                Raj Roy (devKiNGCRiC)
               </a>
             </div>
           </div>
@@ -78,28 +78,35 @@ const Footer: React.FC = () => {
             {/* Social Links */}
             <div className="flex space-x-4 pt-4">
               <motion.a
-                href="https://github.com/devKiNGCRiC"
+                href="https://github.com/devKiNGCRiC/dsa-interactive-visualizer"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 transition-colors"
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
+                title="GitHub Repository"
               >
                 <Github className="h-5 w-5" />
               </motion.a>
               <motion.a
-                href="#"
-                className="text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 transition-colors"
+                href="https://www.linkedin.com/in/raj-roy-kc2806/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
+                title="LinkedIn Profile"
               >
                 <Linkedin className="h-5 w-5" />
               </motion.a>
               <motion.a
-                href="#"
-                className="text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 transition-colors"
+                href="https://x.com/KiNGCRiC28"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-slate-400 hover:text-sky-500 dark:hover:text-sky-400 transition-colors"
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
+                title="X (Twitter) Profile"
               >
                 <Twitter className="h-5 w-5" />
               </motion.a>
@@ -109,7 +116,15 @@ const Footer: React.FC = () => {
 
         <div className="border-t border-slate-200 dark:border-slate-700 mt-8 pt-8 text-center">
           <p className="text-sm text-slate-600 dark:text-slate-400">
-            © {new Date().getFullYear()} DSA Visualizer. Built for educational purposes.
+            © {new Date().getFullYear()} AlgoVisualizer Pro. Built for educational purposes by{' '}
+            <a
+              href="https://github.com/devKiNGCRiC"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-primary-600 dark:text-primary-400 hover:underline"
+            >
+              Raj Roy
+            </a>
           </p>
         </div>
       </div>

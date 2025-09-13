@@ -1,12 +1,17 @@
 import { useState } from 'react'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import Header from './components/Layout/Header'
 import Footer from './components/Layout/Footer'
 import SortingSection from './components/Sorting/SortingSection'
 import PathfindingSection from './components/Pathfinding/PathfindingSection'
 import DataStructuresSection from './components/DataStructures/DataStructuresSection'
+import AboutPage from './components/Pages/AboutPage'
+import ContactPage from './components/Pages/ContactPage'
+import PrivacyPage from './components/Pages/PrivacyPage'
+import TermsPage from './components/Pages/TermsPage'
 
-function App() {
+function MainVisualizer() {
   const [activeSection, setActiveSection] = useState('sorting')
 
   const renderSection = () => {
@@ -23,7 +28,7 @@ function App() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800">
+    <>
       <Header activeSection={activeSection} onSectionChange={setActiveSection} />
       
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -41,7 +46,23 @@ function App() {
       </main>
       
       <Footer />
-    </div>
+    </>
+  )
+}
+
+function App() {
+  return (
+    <Router>
+      <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800">
+        <Routes>
+          <Route path="/" element={<MainVisualizer />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/contact" element={<ContactPage />} />
+          <Route path="/privacy" element={<PrivacyPage />} />
+          <Route path="/terms" element={<TermsPage />} />
+        </Routes>
+      </div>
+    </Router>
   )
 }
 

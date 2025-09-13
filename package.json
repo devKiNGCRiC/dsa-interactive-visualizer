@@ -3,9 +3,17 @@
   "private": false,
   "version": "1.0.0",
   "description": "Professional Algorithm Visualizer - Interactive learning platform for Data Structures & Algorithms",
-  "author": "Your Name",
+  "author": "Raj Roy",
   "license": "MIT",
-  "keywords": ["data-structures", "algorithms", "visualization", "react", "typescript", "sorting", "educational"],
+  "keywords": [
+    "data-structures",
+    "algorithms",
+    "visualization",
+    "react",
+    "typescript",
+    "sorting",
+    "educational"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/devKiNGCRiC/dsa-interactive-visualizer.git"
@@ -20,10 +28,12 @@
   },
   "dependencies": {
     "@types/node": "^24.3.1",
+    "@types/react-router-dom": "^5.3.3",
     "framer-motion": "^12.23.12",
     "lucide-react": "^0.544.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
+    "react-router-dom": "^7.9.1",
     "recharts": "^3.2.0",
     "zustand": "^5.0.8"
   },
