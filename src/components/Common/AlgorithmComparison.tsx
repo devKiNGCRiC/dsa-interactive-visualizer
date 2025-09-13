@@ -351,41 +351,41 @@ const AlgorithmComparison: React.FC<AlgorithmComparisonProps> = ({
       {comparing.length > 0 ? (
         <div className="bg-white dark:bg-slate-800 rounded-xl shadow-lg border border-slate-200 dark:border-slate-700 overflow-hidden">
           <div className="overflow-x-auto">
-{showActualData ? (
-              <table className="w-full">
+            {showActualData ? (
+              <table className="w-full min-w-[800px]">
                 <thead className="bg-slate-50 dark:bg-slate-700">
                   <tr>
-                    <th className="px-6 py-4 text-left text-sm font-semibold text-slate-900 dark:text-white">
+                    <th className="px-3 py-3 text-left text-xs font-semibold text-slate-900 dark:text-white">
                       Algorithm
                     </th>
-                    <th className="px-6 py-4 text-center text-sm font-semibold text-slate-900 dark:text-white">
+                    <th className="px-2 py-3 text-center text-xs font-semibold text-slate-900 dark:text-white">
                       Avg Comparisons
                     </th>
-                    <th className="px-6 py-4 text-center text-sm font-semibold text-slate-900 dark:text-white">
+                    <th className="px-2 py-3 text-center text-xs font-semibold text-slate-900 dark:text-white">
                       Avg Swaps
                     </th>
-                    <th className="px-6 py-4 text-center text-sm font-semibold text-slate-900 dark:text-white">
+                    <th className="px-2 py-3 text-center text-xs font-semibold text-slate-900 dark:text-white">
                       Time Score
                       <div className="text-xs font-normal text-slate-500 dark:text-slate-400">
-                        (Based on actual performance)
+                        (Performance)
                       </div>
                     </th>
-                    <th className="px-6 py-4 text-center text-sm font-semibold text-slate-900 dark:text-white">
+                    <th className="px-2 py-3 text-center text-xs font-semibold text-slate-900 dark:text-white">
                       Space Score
                       <div className="text-xs font-normal text-slate-500 dark:text-slate-400">
-                        (Based on actual efficiency)
+                        (Efficiency)
                       </div>
                     </th>
-                    <th className="px-6 py-4 text-center text-sm font-semibold text-slate-900 dark:text-white">
+                    <th className="px-2 py-3 text-center text-xs font-semibold text-slate-900 dark:text-white">
                       Overall Score
                       <div className="text-xs font-normal text-slate-500 dark:text-slate-400">
-                        (Performance-based)
+                        (Combined)
                       </div>
                     </th>
-                    <th className="px-6 py-4 text-center text-sm font-semibold text-slate-900 dark:text-white">
+                    <th className="px-2 py-3 text-center text-xs font-semibold text-slate-900 dark:text-white">
                       Stable
                     </th>
-                    <th className="px-6 py-4 text-center text-sm font-semibold text-slate-900 dark:text-white">
+                    <th className="px-2 py-3 text-center text-xs font-semibold text-slate-900 dark:text-white">
                       In-Place
                     </th>
                   </tr>
@@ -484,7 +484,7 @@ const AlgorithmComparison: React.FC<AlgorithmComparisonProps> = ({
                 </tbody>
               </table>
             ) : (
-              <table className="w-full">
+              <table className="w-full min-w-[800px]">
                 <thead className="bg-slate-50 dark:bg-slate-700">
                   <tr>
                     <th className="px-6 py-4 text-left text-sm font-semibold text-slate-900 dark:text-white">
