@@ -1,8 +1,8 @@
 {
-  "name": "dsa-interactive-visualizer",
+  "name": "algo-visualizer-pro",
   "private": false,
   "version": "1.0.0",
-  "description": "Interactive Data Structures & Algorithms Visualizer with React, TypeScript, and Tailwind CSS",
+  "description": "Professional Algorithm Visualizer - Interactive learning platform for Data Structures & Algorithms",
   "author": "Your Name",
   "license": "MIT",
   "keywords": ["data-structures", "algorithms", "visualization", "react", "typescript", "sorting", "educational"],
