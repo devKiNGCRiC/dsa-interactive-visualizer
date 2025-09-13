@@ -34,7 +34,7 @@
   }
   
   .visualizer-container {
-    @apply bg-white dark:bg-slate-800 rounded-xl shadow-lg border border-slate-200 dark:border-slate-700 p-8;
+    @apply bg-white dark:bg-slate-800 rounded-xl shadow-lg border border-slate-200 dark:border-slate-700 p-8 overflow-hidden;
   }
   
   .array-element {

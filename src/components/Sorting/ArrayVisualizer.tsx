@@ -32,14 +32,24 @@ const ArrayVisualizer: React.FC<ArrayVisualizerProps> = ({
     return Math.max(20, (value / maxValue) * (containerHeight - 60))
   }
 
+  const getBarWidth = () => {
+    // For mobile screens (sm and below)
+    if (typeof window !== 'undefined' && window.innerWidth < 640) {
+      return Math.max(4, Math.min(16, 300 / array.length))
+    }
+    // For tablet and desktop
+    return Math.max(8, Math.min(40, 600 / array.length))
+  }
+
   return (
     <div className="visualizer-container">
       <div 
-        className="flex items-end justify-center gap-1 mx-auto overflow-x-auto"
+        className="flex items-end justify-center gap-1 mx-auto overflow-x-auto pb-4"
         style={{ 
           height: `${containerHeight}px`,
           maxWidth: '100%',
-          width: 'fit-content'
+          width: 'fit-content',
+          minHeight: `${containerHeight}px`
         }}
       >
         {array.map((element, index) => (
@@ -48,7 +58,7 @@ const ArrayVisualizer: React.FC<ArrayVisualizerProps> = ({
             className={`relative flex flex-col items-center justify-end ${getBarClass(element.state)} flex-shrink-0`}
             style={{
               height: `${getBarHeight(element.value)}px`,
-              width: `${Math.max(6, Math.min(30, 400 / array.length))}px`
+              width: `${getBarWidth()}px`
             }}
             initial={{ height: 0, opacity: 0 }}
             animate={{ 
