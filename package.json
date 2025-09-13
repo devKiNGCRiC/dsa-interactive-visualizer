@@ -1,7 +1,16 @@
 {
-  "name": "dsa_project",
-  "private": true,
-  "version": "0.0.0",
+  "name": "dsa-interactive-visualizer",
+  "private": false,
+  "version": "1.0.0",
+  "description": "Interactive Data Structures & Algorithms Visualizer with React, TypeScript, and Tailwind CSS",
+  "author": "Your Name",
+  "license": "MIT",
+  "keywords": ["data-structures", "algorithms", "visualization", "react", "typescript", "sorting", "educational"],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/dsa-interactive-visualizer.git"
+  },
+  "homepage": "https://dsa-interactive-visualizer.vercel.app",
   "type": "module",
   "scripts": {
     "dev": "vite",

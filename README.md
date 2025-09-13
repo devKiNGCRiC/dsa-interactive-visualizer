@@ -1,25 +1,37 @@
-# DSA Interactive Visualizer
+# 🚀 DSA Interactive Visualizer
 
-An interactive web application for learning and visualizing data structures and algorithms. Built with modern web technologies including React, TypeScript, and Tailwind CSS.
+An interactive web application for learning and visualizing data structures and algorithms with **real-time performance analysis and dynamic scoring**. Built with modern web technologies including React, TypeScript, and Tailwind CSS.
 
-![DSA Visualizer](https://img.shields.io/badge/React-18-blue) ![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue) ![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.0-blue) ![Vite](https://img.shields.io/badge/Vite-7.0-green)
+![DSA Visualizer](https://img.shields.io/badge/React-18-blue) ![TypeScript](https://img.shields.io/badge/TypeScript-5.8-blue) ![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.4-blue) ![Vite](https://img.shields.io/badge/Vite-7.1-green)
 
-## 🚀 Features
+## ✨ Features
 
-### ✅ Sorting Algorithms (Available)
-- **Bubble Sort** - Simple comparison-based algorithm
-- **Selection Sort** - Finds minimum element repeatedly
-- **Insertion Sort** - Builds sorted array one element at a time
-- **Merge Sort** - Divide and conquer approach
-- **Quick Sort** - Efficient partitioning algorithm
+### 🔄 Sorting Algorithms Visualization
+- **5 Interactive Algorithms**: Bubble Sort, Selection Sort, Insertion Sort, Merge Sort, Quick Sort
+- **Real-time Visualization**: Watch algorithms sort step-by-step with smooth animations
+- **Performance Tracking**: Track comparisons, swaps, and execution time
+- **Custom Input**: Test with your own arrays or generate random data
+- **Speed Control**: Adjust animation speed from slow to ultra-fast
 
-**Interactive Features:**
+### 📊 Advanced Algorithm Comparison System
+- **Dual-Mode Analysis**: 
+  - **Theoretical Mode**: Compare time/space complexity, stability, and implementation characteristics
+  - **Actual Results Mode**: Compare real performance data with **dynamic scoring system**
+- **Performance-Based Scoring**: 
+  - **Time Score**: Based on actual comparisons performed (0-10 scale)
+  - **Space Score**: Based on memory operations/swaps (0-10 scale)
+  - **Overall Score**: Combined efficiency metric based on real performance
+- **Smart Sorting**: Sort algorithms by actual performance in both theoretical and actual modes
+- **Algorithm Properties**: Clear visual indicators for stability and in-place characteristics
+
+### 🎛️ Interactive Features
 - ⚡ Real-time visualization with smooth animations
 - 🎛️ Adjustable speed controls (1-500%)
-- 📊 Performance metrics (comparisons & swaps)
-- 🔀 Random array generation
-- 📏 Customizable array size (5-100 elements)
+- 📊 **Dynamic performance metrics** that update based on actual algorithm execution
+- 🔀 Random array generation with customizable size (5-100 elements)
+- 📏 Custom array input for testing specific scenarios
 - 🎨 Color-coded element states (comparing, swapping, sorted)
+- 📈 **Performance history tracking** across multiple runs
 
 ### 🔄 Coming Soon
 - **Pathfinding Algorithms** - Dijkstra's, A*, BFS, DFS
@@ -46,8 +58,8 @@ An interactive web application for learning and visualizing data structures and 
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/devKiNGCRiC/dsa-visualizer.git
-   cd dsa-visualizer
+   git clone https://github.com/yourusername/dsa-interactive-visualizer.git
+   cd dsa-interactive-visualizer
    ```
 
 2. **Install dependencies**
@@ -108,7 +120,42 @@ src/
 └── styles/             # Global styles and Tailwind config
 ```
 
-## 🎯 Learning Objectives
+## 🎯 Dynamic Scoring System
+
+### How Scoring Works
+
+**In Actual Results Mode**, scores are calculated based on real performance data:
+
+#### Time Score (0-10)
+- **Based on**: Number of comparisons performed relative to array size
+- **Formula**: `10 - (average_comparisons / array_size²) * 10`
+- **Higher is Better**: More efficient algorithms get higher scores
+- **Real-time**: Updates based on actual algorithm execution
+
+#### Space Score (0-10)
+- **Based on**: Number of swaps/memory operations relative to array size
+- **Formula**: `10 - (average_swaps / array_size²) * 5`
+- **Higher is Better**: Fewer memory operations = higher score
+- **Real-time**: Reflects actual memory efficiency
+
+#### Overall Score (0-10)
+- **Formula**: `(Time Score + Space Score) / 2`
+- **Dynamic**: Changes based on actual performance data
+- **Meaningful Sorting**: Sort functionality now works with real performance metrics
+
+### Algorithm Properties (Static Characteristics)
+
+#### Stability
+- **Stable (✅)**: Maintains relative order of equal elements
+- **Unstable (❌)**: May change relative order of equal elements
+- **Examples**: Bubble Sort (stable), Quick Sort (unstable)
+
+#### In-Place Memory Usage
+- **In-Place (✅)**: Uses O(1) additional memory
+- **Not In-Place (❌)**: Requires O(n) or more additional memory  
+- **Examples**: Quick Sort (in-place), Merge Sort (not in-place)
+
+## 📊 Supported Algorithms
 
 This project helps you understand:
 
