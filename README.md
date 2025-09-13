@@ -1,6 +1,8 @@
-# 🚀 DSA Interactive Visualizer
+# 🚀 AlgoVisualizer Pro
 
 An interactive web application for learning and visualizing data structures and algorithms with **real-time performance analysis and dynamic scoring**. Built with modern web technologies including React, TypeScript, and Tailwind CSS.
+
+🌐 **Live Demo**: [https://algovisualizer-pro.vercel.app](https://algovisualizer-pro.vercel.app)
 
 ![DSA Visualizer](https://img.shields.io/badge/React-18-blue) ![TypeScript](https://img.shields.io/badge/TypeScript-5.8-blue) ![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.4-blue) ![Vite](https://img.shields.io/badge/Vite-7.1-green)
 
@@ -220,9 +222,12 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 👨‍💻 Author
 
-**devKiNGCRiC**
+**devKiNGCRiC (Raj Roy)**
 - GitHub: [@devKiNGCRiC](https://github.com/devKiNGCRiC)
-- Project Link: [https://github.com/devKiNGCRiC/dsa-visualizer](https://github.com/devKiNGCRiC/dsa-visualizer)
+- X (Twitter): [@KiNGCRiC28](https://x.com/KiNGCRiC28)
+- LinkedIn: [Raj Roy](https://www.linkedin.com/in/raj-roy-kc2806/)
+- Project Link: [https://github.com/devKiNGCRiC/dsa-interactive-visualizer](https://github.com/devKiNGCRiC/dsa-interactive-visualizer)
+- Live Demo: [https://algovisualizer-pro.vercel.app](https://algovisualizer-pro.vercel.app)
 
 ## 🙏 Acknowledgments
 

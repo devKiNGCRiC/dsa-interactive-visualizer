@@ -18,7 +18,7 @@
     "type": "git",
     "url": "https://github.com/devKiNGCRiC/dsa-interactive-visualizer.git"
   },
-  "homepage": "https://dsa-interactive-visualizer.vercel.app",
+  "homepage": "https://algovisualizer-pro.vercel.app",
   "type": "module",
   "scripts": {
     "dev": "vite",

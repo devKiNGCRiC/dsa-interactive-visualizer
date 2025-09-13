@@ -12,8 +12,6 @@ const ArrayVisualizer: React.FC<ArrayVisualizerProps> = ({
   maxValue = Math.max(...array.map(el => el.value)) 
 }) => {
   const containerHeight = 400
-  const barSpacing = 4
-  const containerWidth = Math.max(800, array.length * (barSpacing + 20))
 
   const getBarClass = (state: ArrayElement['state']) => {
     switch (state) {
@@ -37,21 +35,20 @@ const ArrayVisualizer: React.FC<ArrayVisualizerProps> = ({
   return (
     <div className="visualizer-container">
       <div 
-        className="flex items-end justify-center space-x-1 mx-auto overflow-x-auto"
+        className="flex items-end justify-center gap-1 mx-auto overflow-x-auto"
         style={{ 
           height: `${containerHeight}px`,
-          width: `${Math.min(containerWidth, 800)}px`,
-          minWidth: '100%'
+          maxWidth: '100%',
+          width: 'fit-content'
         }}
       >
         {array.map((element, index) => (
           <motion.div
             key={`${element.index}-${element.value}`}
-            className={`relative flex flex-col items-center justify-end ${getBarClass(element.state)}`}
+            className={`relative flex flex-col items-center justify-end ${getBarClass(element.state)} flex-shrink-0`}
             style={{
               height: `${getBarHeight(element.value)}px`,
-              minWidth: `${Math.max(20, 800 / array.length - barSpacing)}px`,
-              maxWidth: `${Math.max(40, 800 / array.length - barSpacing)}px`,
+              width: `${Math.max(6, Math.min(30, 400 / array.length))}px`
             }}
             initial={{ height: 0, opacity: 0 }}
             animate={{ 
