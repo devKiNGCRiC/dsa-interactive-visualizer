@@ -11,7 +11,7 @@ const ArrayVisualizer: React.FC<ArrayVisualizerProps> = ({
   array, 
   maxValue = Math.max(...array.map(el => el.value)) 
 }) => {
-  const containerHeight = 400
+  const containerHeight = 450 // Increased from 400 to give more space for indices
   const barSpacing = 2
   
   // Calculate responsive bar width based on screen size and array length
@@ -40,16 +40,17 @@ const ArrayVisualizer: React.FC<ArrayVisualizerProps> = ({
   }
 
   const getBarHeight = (value: number) => {
-    return Math.max(20, (value / maxValue) * (containerHeight - 60))
+    return Math.max(20, (value / maxValue) * (containerHeight - 100)) // Increased margin from 60 to 100
   }
 
   return (
     <div className="visualizer-container w-full">
       <div 
-        className="flex items-end justify-center space-x-1 mx-auto overflow-x-auto px-4 pb-8"
+        className="flex items-end justify-center space-x-1 mx-auto overflow-x-auto px-4"
         style={{ 
           height: `${containerHeight}px`,
-          maxWidth: '100%'
+          maxWidth: '100%',
+          paddingBottom: '50px' // Extra padding for indices
         }}
       >
         {array.map((element, index) => (
@@ -89,12 +90,12 @@ const ArrayVisualizer: React.FC<ArrayVisualizerProps> = ({
               {element.value}
             </motion.span>
             
-            {/* Index label - positioned with extra bottom spacing */}
+            {/* Index label - positioned with sufficient bottom spacing */}
             <motion.span
               className="absolute text-xs text-slate-500 dark:text-slate-400 whitespace-nowrap"
               style={{ 
-                bottom: '-28px',
-                fontSize: array.length > 50 ? '9px' : '11px'
+                bottom: '-35px', // Increased from -28px
+                fontSize: array.length > 50 ? '10px' : array.length > 30 ? '11px' : '12px'
               }}
               initial={{ y: -10, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}

@@ -209,11 +209,20 @@ const SortingSection: React.FC = () => {
         <SortingControls />
       </motion.div>
 
-      {/* Mobile-Optimized Playback Controls */}
+      {/* Visualizer */}
+      <motion.div
+        initial={{ opacity: 0, x: 20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ delay: 0.3 }}
+      >
+        <ArrayVisualizer array={array} />
+      </motion.div>
+
+      {/* Mobile-Optimized Playback Controls - Below visualization */}
       <motion.div
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.25 }}
+        transition={{ delay: 0.35 }}
         className="block lg:hidden"
       >
         <PlaybackControls
@@ -222,15 +231,6 @@ const SortingSection: React.FC = () => {
           onShuffle={shuffleArray}
           onReset={resetArray}
         />
-      </motion.div>
-
-      {/* Visualizer */}
-      <motion.div
-        initial={{ opacity: 0, x: 20 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ delay: 0.3 }}
-      >
-        <ArrayVisualizer array={array} />
       </motion.div>
 
       {/* Current Message */}
