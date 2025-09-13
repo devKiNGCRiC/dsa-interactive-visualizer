@@ -98,14 +98,30 @@ const SortingSection: React.FC = () => {
           'quick': 'O(n log n)'
         }
         
-        addPerformanceData({
+        const performanceData = {
           algorithm,
           arraySize: array.length,
           comparisons: currentState.comparisons,
           swaps: currentState.swaps,
           timeComplexity: timeComplexityMap[algorithm] || 'O(n²)',
           timestamp: Date.now()
-        })
+        }
+        
+        addPerformanceData(performanceData)
+        
+        // Track algorithm completion in Google Analytics
+        if (typeof window.trackAlgorithmUsage === 'function') {
+          window.trackAlgorithmUsage(algorithm, array.length)
+        }
+        if (typeof window.trackPerformance === 'function') {
+          window.trackPerformance(
+            algorithm, 
+            currentState.comparisons, 
+            currentState.swaps, 
+            Date.now() - performanceData.timestamp
+          )
+        }
+        
         break
       }
     }

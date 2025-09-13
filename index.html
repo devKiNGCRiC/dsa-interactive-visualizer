@@ -55,6 +55,46 @@
     <meta http-equiv="X-XSS-Protection" content="1; mode=block" />
     <meta name="referrer" content="strict-origin-when-cross-origin" />
     
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=%VITE_GA_TRACKING_ID%"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      
+      // Enhanced Google Analytics configuration
+      gtag('config', '%VITE_GA_TRACKING_ID%', {
+        page_title: document.title,
+        page_location: window.location.href,
+        send_page_view: true,
+        // Enhanced eCommerce and events tracking
+        custom_map: {
+          'custom_parameter': 'algorithm_used'
+        }
+      });
+      
+      // Track algorithm usage
+      window.trackAlgorithmUsage = function(algorithmName, arraySize) {
+        gtag('event', 'algorithm_visualization', {
+          event_category: 'Algorithm',
+          event_label: algorithmName,
+          custom_parameter: algorithmName,
+          value: arraySize
+        });
+      };
+      
+      // Track performance metrics
+      window.trackPerformance = function(algorithm, comparisons, swaps, timeMs) {
+        gtag('event', 'algorithm_performance', {
+          event_category: 'Performance',
+          event_label: algorithm,
+          comparisons: comparisons,
+          swaps: swaps,
+          execution_time: timeMs
+        });
+      };
+    </script>
+    
     <!-- Favicon and Icons -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" type="image/svg+xml" sizes="16x16" href="/favicon-16x16.svg" />

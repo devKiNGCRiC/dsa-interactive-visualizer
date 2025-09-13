@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import { motion } from 'framer-motion'
-import { Mail, MessageCircle, Send, CheckCircle, Github, Linkedin, Twitter, ArrowLeft } from 'lucide-react'
+import { Mail, MessageCircle, Send, CheckCircle, Github, Linkedin, Twitter, ArrowLeft, AlertCircle } from 'lucide-react'
 import { Link } from 'react-router-dom'
+import emailjs from '@emailjs/browser'
 import Header from '../Layout/Header'
 import Footer from '../Layout/Footer'
 
@@ -14,13 +15,56 @@ const ContactPage: React.FC = () => {
   })
   
   const [isSubmitted, setIsSubmitted] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitError, setSubmitError] = useState('')
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    // Here you would typically handle form submission
-    console.log('Form submitted:', formData)
-    setIsSubmitted(true)
-    setTimeout(() => setIsSubmitted(false), 3000)
+    setIsSubmitting(true)
+    setSubmitError('')
+
+    try {
+      // EmailJS configuration - Replace with your actual values
+      const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID || 'service_default'
+      const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || 'template_default'
+      const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || 'your_public_key'
+
+      // Prepare template parameters
+      const templateParams = {
+        from_name: formData.name,
+        from_email: formData.email,
+        subject: formData.subject,
+        message: formData.message,
+        to_email: 'rajroyking2806@gmail.com', // Your email address
+        reply_to: formData.email,
+        timestamp: new Date().toLocaleString()
+      }
+
+      // Send email using EmailJS
+      await emailjs.send(serviceId, templateId, templateParams, publicKey)
+      
+      // Success - show confirmation and reset form
+      setIsSubmitted(true)
+      setFormData({ name: '', email: '', subject: '', message: '' })
+      
+      // Track contact form submission in Google Analytics
+      if (typeof window.gtag === 'function') {
+        window.gtag('event', 'contact_form_submission', {
+          event_category: 'Contact',
+          event_label: formData.subject,
+          value: 1
+        })
+      }
+      
+      // Reset success message after 5 seconds
+      setTimeout(() => setIsSubmitted(false), 5000)
+      
+    } catch (error) {
+      console.error('Failed to send email:', error)
+      setSubmitError('Failed to send message. Please try again or contact us directly at rajroyking2806@gmail.com')
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -151,15 +195,54 @@ const ContactPage: React.FC = () => {
                   />
                 </div>
 
+                {/* Error Message */}
+                {submitError && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-3"
+                  >
+                    <div className="flex items-center">
+                      <AlertCircle className="h-5 w-5 text-red-600 dark:text-red-400 mr-2" />
+                      <p className="text-sm text-red-800 dark:text-red-200">{submitError}</p>
+                    </div>
+                  </motion.div>
+                )}
+
+                {/* Success Message */}
+                {isSubmitted && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg p-3"
+                  >
+                    <div className="flex items-center">
+                      <CheckCircle className="h-5 w-5 text-green-600 dark:text-green-400 mr-2" />
+                      <p className="text-sm text-green-800 dark:text-green-200">
+                        Message sent successfully! We'll get back to you soon.
+                      </p>
+                    </div>
+                  </motion.div>
+                )}
+
                 {/* Submit Button */}
                 <motion.button
                   type="submit"
-                  className="w-full flex items-center justify-center px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg font-semibold hover:from-blue-700 hover:to-purple-700 transition-all duration-200"
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  disabled={isSubmitted}
+                  className={`w-full flex items-center justify-center px-6 py-3 rounded-lg font-semibold transition-all duration-200 ${
+                    isSubmitting || isSubmitted
+                      ? 'bg-slate-400 dark:bg-slate-600 cursor-not-allowed'
+                      : 'bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700'
+                  } text-white`}
+                  whileHover={!isSubmitting && !isSubmitted ? { scale: 1.02 } : {}}
+                  whileTap={!isSubmitting && !isSubmitted ? { scale: 0.98 } : {}}
+                  disabled={isSubmitting || isSubmitted}
                 >
-                  {isSubmitted ? (
+                  {isSubmitting ? (
+                    <>
+                      <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
+                      Sending...
+                    </>
+                  ) : isSubmitted ? (
                     <>
                       <CheckCircle className="h-5 w-5 mr-2" />
                       Message Sent!
