@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import type { ArrayElement } from '../../stores/algorithmStore'
 
@@ -11,13 +11,26 @@ const ArrayVisualizer: React.FC<ArrayVisualizerProps> = ({
   array, 
   maxValue = Math.max(...array.map(el => el.value)) 
 }) => {
+  const [viewportWidth, setViewportWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 1024)
+  
+  useEffect(() => {
+    const handleResize = () => {
+      setViewportWidth(window.innerWidth)
+    }
+    
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
+
   const containerHeight = 450
   const barSpacing = 2
   
   // Calculate bar width based on array length
   const getBarWidth = () => {
-    if (array.length <= 20) {
-      return 30 // Wide bars for small arrays
+    if (array.length <= 10) {
+      return 30 // Wide bars for very small arrays
+    } else if (array.length <= 20) {
+      return 24 // Medium-wide bars for small arrays
     } else if (array.length <= 50) {
       return 20 // Medium bars
     } else {
@@ -29,6 +42,13 @@ const ArrayVisualizer: React.FC<ArrayVisualizerProps> = ({
   const getTotalWidth = () => {
     const barWidth = getBarWidth()
     return array.length * (barWidth + barSpacing) + 32 // 32px for padding
+  }
+  
+  // Determine if we should center the array or make it scrollable
+  const shouldCenter = () => {
+    const totalWidth = getTotalWidth()
+    const availableWidth = viewportWidth - 64 // Subtract padding
+    return array.length <= 10 || totalWidth <= availableWidth
   }
 
   const getBarClass = (state: ArrayElement['state']) => {
@@ -56,12 +76,12 @@ const ArrayVisualizer: React.FC<ArrayVisualizerProps> = ({
       <div className="w-full overflow-x-auto visualizer-scroll">
         <div 
           className={`flex items-end space-x-1 mx-auto px-4 ${
-            array.length <= 20 ? 'justify-center' : 'justify-start'
+            shouldCenter() ? 'justify-center' : 'justify-start'
           }`}
           style={{ 
             height: `${containerHeight}px`,
-            width: array.length <= 20 ? 'auto' : `${getTotalWidth()}px`,
-            minWidth: array.length <= 20 ? 'auto' : '100%',
+            width: shouldCenter() ? 'auto' : `${getTotalWidth()}px`,
+            minWidth: shouldCenter() ? 'auto' : '100%',
             paddingBottom: '50px' // Extra padding for indices
           }}
         >
@@ -121,7 +141,7 @@ const ArrayVisualizer: React.FC<ArrayVisualizerProps> = ({
       </div>
       
       {/* Scroll indicator for large arrays */}
-      {array.length > 20 && (
+      {!shouldCenter() && (
         <div className="text-center mt-2">
           <p className="text-xs text-slate-500 dark:text-slate-400">
             ← Scroll horizontally to see all {array.length} elements →
@@ -130,7 +150,7 @@ const ArrayVisualizer: React.FC<ArrayVisualizerProps> = ({
       )}
       
       {/* Array size indicator for small arrays */}
-      {array.length <= 20 && (
+      {shouldCenter() && (
         <div className="text-center mt-2">
           <p className="text-xs text-slate-500 dark:text-slate-400">
             Showing all {array.length} elements (centered layout)
